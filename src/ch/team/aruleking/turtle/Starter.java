@@ -1,5 +1,6 @@
 package ch.team.aruleking.turtle;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,12 +23,22 @@ public class Starter {
 	
 	public static void main(String args[]) {
 		AdvancedTurtle turtle = new AdvancedTurtle();
-		JButton button = new JButton("GO!");
+		JButton startButton = new JButton("SORT LINES");
+		JButton restartButton = new JButton("RESET");
 		
-		turtle.getFrame().add(button, BorderLayout.SOUTH);
-		turtle.getFrame().setResizable(false);
+		panel = new JPanel();
+		panel.add(startButton);
+		panel.add(restartButton);
+		panel.setBackground(Color.BLACK);
+		turtle.getFrame().add(panel, BorderLayout.SOUTH);
+//		turtle.getFrame().add(startButton, BorderLayout.SOUTH);
+//		turtle.getFrame().add(restartButton, BorderLayout.SOUTH);
+//		turtle.getFrame().setResizable(false);
 		turtle.getFrame().setSize(400, turtle.getFrame().getHeight());
-		button.repaint();
+		restartButton.setEnabled(false);
+		restartButton.setBackground(Color.BLACK);
+		startButton.setEnabled(false);
+		startButton.setBackground(Color.BLACK);
 		
 		turtle.prepareGround();
 		
@@ -39,17 +50,31 @@ public class Starter {
 						arg0 <= turtle.RIGHTX &&
 						lines.size() < MAXLINES &&
 						turtle.validatePosX(lines, arg0)) {
-					
+					startButton.setEnabled(true);
 					turtle.drawLineatPos(arg0, arg1);
 					lines.add(new Line(arg1, arg0));
 				}
 			}
 		});
-		button.addActionListener(new ActionListener() {
+		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TurtleThread prozess = new TurtleThread(turtle, lines);
 				prozess.start();
+				restartButton.setEnabled(true);
+			}
+		});
+		restartButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (lines.size() > 0) {
+					restartButton.setEnabled(false);
+					startButton.setEnabled(false);
+					lines.clear();
+					turtle.clean();
+					turtle.prepareGround();
+					turtle.drawBottomLine();
+				}
 			}
 		});
 	}
