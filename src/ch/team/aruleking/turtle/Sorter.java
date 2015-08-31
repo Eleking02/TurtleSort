@@ -31,9 +31,7 @@ public class Sorter {
         List<Line> unsorted = new ArrayList<Line>(lines);
         while (unsorted.size() > 0){
             Line longest = this.removeLongest(unsorted);
-            sorted.add(0, longest);
-            
-            
+            sorted.add(0, longest);        
             lines.clear();
             lines.addAll(sorted);
             lines.addAll(unsorted);

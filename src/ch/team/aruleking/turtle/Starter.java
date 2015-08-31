@@ -1,5 +1,6 @@
 package ch.team.aruleking.turtle;
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ import ch.team.aruleking.listener.RadioButtonListener;
 public class Starter {
 	public static List<Line> lines = new ArrayList<Line>();
 	public final static int MAXLINES = 32;
-	private static TurtleThread prozess;
+	private static Thread prozess = new Thread();
 	
 	public static void main(String args[]) {
 		AdvancedTurtle turtle = new AdvancedTurtle();
@@ -76,12 +77,12 @@ public class Starter {
 		
 		//Set Windows look & feel
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | UnsupportedLookAndFeelException e1) {
+            e1.printStackTrace();
+        }
+		
 		SwingUtilities.updateComponentTreeUI(turtle.getFrame());
 		
 		turtle.prepareGround();
@@ -95,7 +96,8 @@ public class Starter {
 						arg0 >= turtle.LEFTX &&
 						arg0 <= turtle.RIGHTX &&
 						lines.size() < MAXLINES &&
-						turtle.validatePosX(lines, arg0)) {
+						turtle.validatePosX(lines, arg0)  &&
+						!prozess.isAlive() ) {
 					startButton.setEnabled(true);
 					turtle.drawLineatPos(arg0, arg1);
 					lines.add(new Line(arg1, arg0));
@@ -105,16 +107,17 @@ public class Starter {
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			    JButton[] buttons = {startButton, restartButton};
 				if (opt1.isSelected()) {
-					prozess = new TurtleThread(turtle, lines);
+					prozess = new BubbleThread(turtle, lines, buttons);
 					prozess.start();
-					restartButton.setEnabled(true);
 				} else if (opt2.isSelected()) {
-					//TODO SelectionSort
+				    prozess = new SelectionThread(turtle, lines, buttons);
+                    prozess.start();
 				} else if (opt3.isSelected()) {
-					//TODO InsertionSort
+				    
 				} else if (opt4.isSelected()) {
-					//TODO QuickSort
+				    
 				}
 			}
 		});
