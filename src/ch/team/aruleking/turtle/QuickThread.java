@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-public class QuickSort extends Thread {
+public class QuickThread extends Thread {
     AdvancedTurtle turtle;
     List<Line> lines;
     JButton[] buttons;
 
-    public QuickSort(AdvancedTurtle at, List<Line> lines,JButton[] buttons) {
+    public QuickThread(AdvancedTurtle at, List<Line> lines,JButton[] buttons) {
         super();
         this.turtle = at;
         this.lines = lines;
