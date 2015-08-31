@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Sorter {
 
-	public synchronized static void bubbleSort(List<Line> lines, AdvancedTurtle turtle) {
+	public synchronized void bubbleSort(List<Line> lines, AdvancedTurtle turtle) {
 		boolean isChanged = true;
 		while (isChanged) {
 			isChanged = false;

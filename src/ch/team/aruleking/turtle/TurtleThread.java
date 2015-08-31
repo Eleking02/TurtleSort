@@ -12,7 +12,8 @@ public class TurtleThread extends Thread {
 	}
 
 	public void run() {
-		Sorter.bubbleSort(lines, turtle);
+		Sorter sorter = new Sorter();
+		sorter.bubbleSort(lines, turtle);
 	}
 
 

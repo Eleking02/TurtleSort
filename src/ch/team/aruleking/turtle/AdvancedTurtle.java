@@ -16,7 +16,6 @@ public class AdvancedTurtle extends Turtle {
 		this.hideTurtle();
 	}
 
-
 	public void jumpTo(double x, double y) {
 		this.penUp();
 		this.moveTo(x, y);
