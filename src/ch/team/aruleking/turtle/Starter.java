@@ -17,6 +17,7 @@ import ch.aplu.turtle.MouseHitListener;
 public class Starter {
 	public static List<Line> lines = new ArrayList<Line>();
 	public final static int MAXLINES = 32;
+	private static TurtleThread prozess;
 	
 	public static void main(String args[]) {
 		AdvancedTurtle turtle = new AdvancedTurtle();
@@ -91,7 +92,7 @@ public class Starter {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (opt1.isSelected()) {
-					TurtleThread prozess = new TurtleThread(turtle, lines);
+					prozess = new TurtleThread(turtle, lines);
 					prozess.start();
 					restartButton.setEnabled(true);
 				} else if (opt2.isSelected()) {
@@ -104,7 +105,8 @@ public class Starter {
 			}
 		});
 		restartButton.addActionListener(new ActionListener() {
-			@Override
+			@SuppressWarnings("deprecation")
+            @Override
 			public void actionPerformed(ActionEvent e) {
 				if (lines.size() > 0) {
 					restartButton.setEnabled(false);
