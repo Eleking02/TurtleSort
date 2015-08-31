@@ -2,7 +2,6 @@ package ch.team.aruleking.turtle;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 
 public class BubbleThread extends Thread {
 	AdvancedTurtle turtle;

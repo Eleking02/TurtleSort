@@ -22,7 +22,7 @@ public class QuickThread extends Thread {
             b.setEnabled(false);
         }
         
-        Sorter sorter = new Sorter();
+//        Sorter sorter = new Sorter();
         
         for (JButton b : buttons){
             b.setEnabled(true);
