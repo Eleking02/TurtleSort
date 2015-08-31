@@ -10,8 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import ch.aplu.turtle.MouseHitListener;
+import ch.team.aruleking.listener.RadioButtonListener;
 
 
 public class Starter {
@@ -70,6 +74,16 @@ public class Starter {
 		turtle.getFrame().setResizable(false);
 		turtle.getFrame().setSize(400, turtle.getFrame().getHeight());
 		
+		//Set Windows look & feel
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		SwingUtilities.updateComponentTreeUI(turtle.getFrame());
+		
 		turtle.prepareGround();
 		
 		
@@ -105,7 +119,6 @@ public class Starter {
 			}
 		});
 		restartButton.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
             @Override
 			public void actionPerformed(ActionEvent e) {
 				if (lines.size() > 0) {
@@ -120,37 +133,9 @@ public class Starter {
 		});
 		
 		//Option buttons
-		opt1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				opt2.setSelected(false);
-				opt3.setSelected(false);
-				opt4.setSelected(false);
-			}
-		});
-		opt2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				opt1.setSelected(false);
-				opt3.setSelected(false);
-				opt4.setSelected(false);
-			}
-		});
-		opt3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				opt1.setSelected(false);
-				opt2.setSelected(false);
-				opt4.setSelected(false);
-			}
-		});
-		opt4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				opt1.setSelected(false);
-				opt2.setSelected(false);
-				opt3.setSelected(false);
-			}
-		});
+		opt1.addActionListener(new RadioButtonListener(new JRadioButton[] {opt2, opt3, opt4}));
+		opt2.addActionListener(new RadioButtonListener(new JRadioButton[] {opt1, opt3, opt4}));
+		opt3.addActionListener(new RadioButtonListener(new JRadioButton[] {opt2, opt1, opt4}));
+		opt4.addActionListener(new RadioButtonListener(new JRadioButton[] {opt1, opt2, opt3}));
 	}
 }
