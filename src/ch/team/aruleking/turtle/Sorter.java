@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Sorter {
 
-    public synchronized void bubbleSort(List<Line> lines, AdvancedTurtle turtle) {
+    public void bubbleSort(List<Line> lines, AdvancedTurtle turtle) {
         boolean isChanged = true;
         while (isChanged) {
             isChanged = false;
@@ -26,7 +26,7 @@ public class Sorter {
         
     }
     
-    public synchronized void selectionSort(List<Line> lines, AdvancedTurtle turtle) {
+    public void selectionSort(List<Line> lines, AdvancedTurtle turtle) {
         List<Line> sorted = new ArrayList<Line>();
         List<Line> unsorted = new ArrayList<Line>(lines);
         while (unsorted.size() > 0){
@@ -45,7 +45,7 @@ public class Sorter {
         turtle.repaint(lines);
     }
     
-	public synchronized void insertionSorter(List<Line> lines, AdvancedTurtle turtle) {
+	public void insertionSorter(List<Line> lines, AdvancedTurtle turtle) {
 		Line temp;
 		
 		for (int i = 1; i < lines.size(); i++) {
@@ -54,13 +54,23 @@ public class Sorter {
 			while (j > 0 && lines.get(j - 1).getLength() > temp.getLength()) {
 				lines.set(j, lines.get(j - 1));
 				j--;
+				turtle.repaint(lines);
+				try {
+	                Thread.sleep(50);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
 			}
 			lines.set(j, temp);
 		}
-//		turtle.drawAllLines(lines);
+		turtle.repaint(lines);
 	}
     
-    private synchronized Line removeLongest(List<Line> lines){
+	public void quickSort(List<Line> lines, AdvancedTurtle turtle) {
+		
+	}
+	
+    private Line removeLongest(List<Line> lines){
         Line longest = lines.get(0);
         int removeThisIndex = 0;
         for (int index = 1; index < lines.size(); index++){
