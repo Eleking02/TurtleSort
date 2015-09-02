@@ -45,6 +45,21 @@ public class Sorter {
         turtle.repaint(lines);
     }
     
+	public synchronized void insertionSorter(List<Line> lines, AdvancedTurtle turtle) {
+		Line temp;
+		
+		for (int i = 1; i < lines.size(); i++) {
+			temp = lines.get(i);
+			int j = i;
+			while (j > 0 && lines.get(j - 1).getLength() > temp.getLength()) {
+				lines.set(j, lines.get(j - 1));
+				j--;
+			}
+			lines.set(j, temp);
+		}
+//		turtle.drawAllLines(lines);
+	}
+    
     private synchronized Line removeLongest(List<Line> lines){
         Line longest = lines.get(0);
         int removeThisIndex = 0;

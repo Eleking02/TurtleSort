@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -29,7 +28,7 @@ public class Starter {
 		JPanel optionPanel = new JPanel();
 		JButton startButton = new JButton("SORT LINES");
 		JButton restartButton = new JButton("RESET");
-		JSlider slider = new JSlider();
+//		JSlider slider = new JSlider();
 		JRadioButton opt1 = new JRadioButton();
 		JRadioButton opt2 = new JRadioButton();
 		JRadioButton opt3 = new JRadioButton();
@@ -40,11 +39,11 @@ public class Starter {
 		restartButton.setBackground(Color.BLACK);
 		startButton.setEnabled(false);
 		startButton.setBackground(Color.BLACK);
-		slider.setBackground(Color.BLACK);
-		slider.setFocusable(false);
-		slider.setMaximum(100);
-		slider.setMinimum(1);
-		slider.setToolTipText("Sortspeed");
+//		slider.setBackground(Color.BLACK);
+//		slider.setFocusable(false);
+//		slider.setMaximum(100);
+//		slider.setMinimum(1);
+//		slider.setToolTipText("Sortspeed");
 		opt1.setText("BubbleSort");
 		opt1.setBackground(Color.BLACK);
 		opt1.setForeground(Color.WHITE);
@@ -60,7 +59,7 @@ public class Starter {
 		
 		panel.add(startButton);
 		panel.add(restartButton);
-		panel.add(slider);
+//		panel.add(slider);
 		optionPanel.add(opt1);
 		optionPanel.add(opt2);
 		optionPanel.add(opt3);
@@ -114,9 +113,10 @@ public class Starter {
 				    prozess = new SelectionThread(turtle, lines, buttons);
                     prozess.start();
 				} else if (opt3.isSelected()) {
-				    
+				    prozess = new InsertionThread(turtle, lines, buttons);
+				    prozess.start();
 				} else if (opt4.isSelected()) {
-				    
+				    //TODO quicksort
 				}
 			}
 		});

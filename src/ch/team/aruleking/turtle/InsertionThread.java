@@ -22,7 +22,8 @@ public class InsertionThread extends Thread {
             b.setEnabled(false);
         }
         
-//        Sorter sorter = new Sorter();
+        Sorter sorter = new Sorter();
+        sorter.insertionSorter(lines, turtle);
         
         for (JButton b : buttons){
             b.setEnabled(true);
