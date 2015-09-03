@@ -15,6 +15,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import ch.aplu.turtle.MouseHitListener;
 import ch.team.aruleking.listener.RadioButtonListener;
+import ch.team.aruleking.thread.BubbleThread;
+import ch.team.aruleking.thread.InsertionThread;
+import ch.team.aruleking.thread.QuickThread;
+import ch.team.aruleking.thread.SelectionThread;
 
 
 public class Starter {
@@ -47,6 +51,7 @@ public class Starter {
 		opt1.setText("BubbleSort");
 		opt1.setBackground(Color.BLACK);
 		opt1.setForeground(Color.WHITE);
+		opt1.setSelected(true);
 		opt2.setText("SelectionSort");
 		opt2.setForeground(Color.WHITE);
 		opt2.setBackground(Color.BLACK);
@@ -97,6 +102,7 @@ public class Starter {
 						turtle.validatePosX(lines, arg0)  &&
 						!prozess.isAlive() ) {
 					startButton.setEnabled(true);
+					restartButton.setEnabled(true);
 					turtle.drawLineatPos(arg0, arg1);
 					lines.add(new Line(arg1, arg0));
 				}
@@ -116,7 +122,8 @@ public class Starter {
 				    prozess = new InsertionThread(turtle, lines, buttons);
 				    prozess.start();
 				} else if (opt4.isSelected()) {
-				    //TODO quicksort
+				    prozess = new QuickThread(turtle, lines, buttons);
+				    prozess.start();
 				}
 			}
 		});

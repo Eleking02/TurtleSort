@@ -17,7 +17,7 @@ public class Sorter {
                 }
                 turtle.repaint(lines);
                 try {
-                    Thread.sleep(30);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -37,7 +37,7 @@ public class Sorter {
             lines.addAll(unsorted);
             turtle.repaint(lines);
             try {
-                Thread.sleep(500);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -66,16 +66,47 @@ public class Sorter {
 		turtle.repaint(lines);
 	}
     
-	public void quickSort(List<Line> lines, AdvancedTurtle turtle) {
+	public void quickSort(List<Line> lines, AdvancedTurtle turtle, double low, double high) {
+		double middle = low + (high - low) / 2;
+		Line pivot = lines.get((int) middle);
 		
+		int i = (int) low, j = (int) high;
+		while (i <= j) {
+			while (lines.get(i).getLength() < pivot.getLength()) {
+				i++;
+			}
+			while (lines.get(j).getLength() > pivot.getLength()) {
+				j--;
+			}
+			
+			if (i <= j) {
+				Line line = lines.get(i);
+				lines.set(i, lines.get(j));
+				lines.set(j, line);
+				i++;
+				j--;
+			}
+			turtle.repaint(lines);
+			try {
+                Thread.sleep(150);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+		}
+		if (low < j) {
+			this.quickSort(lines, turtle, low, j);
+		}
+		if (high > i) {
+			this.quickSort(lines, turtle, i, high);
+		}
 	}
 	
-    private Line removeLongest(List<Line> lines){
+    private Line removeLongest(List<Line> lines) {
         Line longest = lines.get(0);
         int removeThisIndex = 0;
-        for (int index = 1; index < lines.size(); index++){
+        for (int index = 1; index < lines.size(); index++) {
             Line nextLine = lines.get(index);
-            if (nextLine.getLength() > longest.getLength()){
+            if (nextLine.getLength() > longest.getLength()) {
                 longest = nextLine;
                 removeThisIndex = index;
             }

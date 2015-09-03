@@ -1,11 +1,15 @@
 
-package ch.team.aruleking.turtle;
+package ch.team.aruleking.thread;
 
 import java.util.List;
 
 import javax.swing.JButton;
 
-public class QuickThread extends Thread {
+import ch.team.aruleking.turtle.AdvancedTurtle;
+import ch.team.aruleking.turtle.Line;
+import ch.team.aruleking.turtle.Sorter;
+
+public class QuickThread extends SortThread {
     AdvancedTurtle turtle;
     List<Line> lines;
     JButton[] buttons;
@@ -18,15 +22,11 @@ public class QuickThread extends Thread {
     }
 
     public void run() {
-        for (JButton b : buttons){
-            b.setEnabled(false);
-        }
-        
+    	this.setButtonsEnabled(buttons, false);
+    	
         Sorter sorter = new Sorter();
-      //  sorter.quickSort(lines, turtle);
+        sorter.quickSort(lines, turtle, 0, lines.size() - 1);
         
-        for (JButton b : buttons){
-            b.setEnabled(true);
-        }
+        this.setButtonsEnabled(buttons, true);
     }
 }

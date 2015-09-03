@@ -8,15 +8,20 @@ import javax.swing.JRadioButton;
 public class RadioButtonListener implements ActionListener {
 
 	private JRadioButton[] radios;
-	
+
 	public RadioButtonListener(JRadioButton[] buttons) {
 		this.radios = buttons;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for (JRadioButton radio : radios) {
-			radio.setSelected(false);
+		JRadioButton element = (JRadioButton) e.getSource();
+		if (element.isSelected()) {
+			for (JRadioButton radio : radios) {
+				radio.setSelected(false);
+			}
+		} else {
+			element.setSelected(true);
 		}
 	}
 }
