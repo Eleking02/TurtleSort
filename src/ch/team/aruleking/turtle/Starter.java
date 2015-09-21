@@ -58,7 +58,6 @@ public class Starter {
 		
 		panel.add(startButton);
 		panel.add(restartButton);
-//		panel.add(slider);
 		optionPanel.add(opt1);
 		optionPanel.add(opt2);
 		optionPanel.add(opt3);
@@ -71,17 +70,6 @@ public class Starter {
 		turtle.getFrame().add(optionPanel, BorderLayout.NORTH);
 		turtle.getFrame().setResizable(false);
 		turtle.getFrame().setSize(400, turtle.getFrame().getHeight());
-		
-		//Set Windows look & feel
-		try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e1) {
-            e1.printStackTrace();
-        }
-		
-		SwingUtilities.updateComponentTreeUI(turtle.getFrame());
-		
 		turtle.prepareGround();
 		
 		
