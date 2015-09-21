@@ -32,7 +32,6 @@ public class Starter {
 		JPanel optionPanel = new JPanel();
 		JButton startButton = new JButton("SORT LINES");
 		JButton restartButton = new JButton("RESET");
-//		JSlider slider = new JSlider();
 		JRadioButton opt1 = new JRadioButton();
 		JRadioButton opt2 = new JRadioButton();
 		JRadioButton opt3 = new JRadioButton();
@@ -43,11 +42,6 @@ public class Starter {
 		restartButton.setBackground(Color.BLACK);
 		startButton.setEnabled(false);
 		startButton.setBackground(Color.BLACK);
-//		slider.setBackground(Color.BLACK);
-//		slider.setFocusable(false);
-//		slider.setMaximum(100);
-//		slider.setMinimum(1);
-//		slider.setToolTipText("Sortspeed");
 		opt1.setText("BubbleSort");
 		opt1.setBackground(Color.BLACK);
 		opt1.setForeground(Color.WHITE);
@@ -108,6 +102,7 @@ public class Starter {
 				}
 			}
 		});
+		
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
